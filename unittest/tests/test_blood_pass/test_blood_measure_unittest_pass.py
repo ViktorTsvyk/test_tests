@@ -1,4 +1,4 @@
-""" ALL TESTS PASS """
+""" 98 TESTS PASS """
 import unittest
 from devsure.test_base.test_case_base import TestCaseBase
 from .tenv import TEnv

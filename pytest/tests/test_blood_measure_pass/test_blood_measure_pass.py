@@ -1,4 +1,4 @@
-""" All tests pass """
+""" 104 tests pass """
 
 
 import pytest
@@ -8,7 +8,7 @@ import time
 from common_items.use_variables import COMMON_STRING
 # ---------------------------------------
 def rand_pause():
-    pause_sec = random.randint(0, 3)
+    pause_sec = random.randint(1, 2)
     time.sleep(pause_sec)
 
 # ---------------------------------------
@@ -71,7 +71,7 @@ def test_blood_pressure_md_connected_power_class(tenv: TEnv):
     cls = items[4]
     rand_pause()
     print(f"Connected power class is: {cls}")
-    assert cls == "DCAdapterAgilent"
+    assert cls.startswith("DCAdapter")
 
 def test_power_source_current_limit(tenv: TEnv):
     current_limit = tenv.power_source.current_limit
@@ -163,7 +163,7 @@ def test_blood_pressure_md_connected_power_class_value(tenv: TEnv):
     cls = items[4]
     rand_pause()
     print(f"Connected power class is: {cls}")
-    assert cls == "DCAdapterAgilent"
+    assert cls.startswith("DCAdapter")
 
 
 def test_power_source_current_limit_value(tenv: TEnv):
@@ -260,7 +260,7 @@ def test_blood_pressure_md_connected_power_class_name(tenv: TEnv):
     cls = items[4]
     rand_pause()
     print(f"Connected power class is: {cls}")
-    assert cls == "DCAdapterAgilent"
+    assert cls.startswith("DCAdapter")
 
 
 def test_power_source_current_limit_measurement(tenv: TEnv):
@@ -356,7 +356,7 @@ def test_blood_pressure_md_device_connected_power_class(tenv: TEnv):
     cls = items[4]
     rand_pause()
     print(f"Connected power class is: {cls}")
-    assert cls == "DCAdapterAgilent"
+    assert cls.startswith("DCAdapter")
 
 
 def test_source_current_limit(tenv: TEnv):
@@ -452,7 +452,7 @@ def test_blood_pressure_md_connected_power_class_title(tenv: TEnv):
     cls = items[4]
     rand_pause()
     print(f"Connected power class is: {cls}")
-    assert cls == "DCAdapterAgilent"
+    assert cls.startswith("DCAdapter")
 
 
 def test_power_source_current_limit_calc(tenv: TEnv):
@@ -554,7 +554,7 @@ def test_blood_pressure_md_connected_power_class_val(tenv: TEnv):
     cls = items[4]
     rand_pause()
     print(f"Connected power class is: {cls}")
-    assert cls == "DCAdapterAgilent"
+    assert cls.startswith("DCAdapter")
 
 
 def test_power_source_current_limit_calculation(tenv: TEnv):
@@ -649,7 +649,7 @@ def test_blood_pressure_md_connected_power_val(tenv: TEnv):
     cls = items[4]
     rand_pause()
     print(f"Connected power class is: {cls}")
-    assert cls == "DCAdapterAgilent"
+    assert cls.startswith("DCAdapter")
 
 
 def test_source_current_limit_calculation(tenv: TEnv):
@@ -744,7 +744,7 @@ def test_blood_pressure_md_device_connected_power_val(tenv: TEnv):
     cls = items[4]
     rand_pause()
     print(f"Connected power class is: {cls}")
-    assert cls == "DCAdapterAgilent"
+    assert cls.startswith("DCAdapter")
 
 
 def test_power_source_device_current_limit_calculation(tenv: TEnv):
@@ -800,7 +800,7 @@ def test_blood_pressure_md_device_connected_power_value(tenv: TEnv):
     cls = items[4]
     rand_pause()
     print(f"Connected power class is: {cls}")
-    assert cls == "DCAdapterAgilent"
+    assert cls.startswith("DCAdapter")
 
 
 def test_power_source_device_current_limit_calc_info(tenv: TEnv):

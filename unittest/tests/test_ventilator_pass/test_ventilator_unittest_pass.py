@@ -1,4 +1,4 @@
-""" ALL TESTS PASS """
+""" 92 TESTS PASS """
 
 import unittest
 from devsure.test_base.test_case_base import TestCaseBase
@@ -616,7 +616,7 @@ class TestOurModel(TestCaseBase):
         rand_pause()
         self.assertIn("DCMotor", connected_power)
 
-    def test_pressure_resturns_class(self):
+    def test_pressure_returns_class(self):
         self.log.info("Read information about the ventilator pressure...")
         rand_pause()
         vent_pressure = str(type(self.tenv.ventilator.pressure))
@@ -700,7 +700,7 @@ class TestOurModel(TestCaseBase):
         rand_pause()
         self.assertIn("DCMotor", connected_power)
 
-    def test_pressure_resturn_type(self):
+    def test_pressure_return_type(self):
         self.log.info("Read information about the ventilator pressure...")
         rand_pause()
         vent_pressure = str(type(self.tenv.ventilator.pressure))

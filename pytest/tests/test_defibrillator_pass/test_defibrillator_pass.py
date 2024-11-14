@@ -1,4 +1,4 @@
-""" All tests pass """
+""" 106 tests pass """
 from .tenv import TEnv
 import random
 import time
@@ -6,7 +6,7 @@ import time
 
 # ---------------------------------------
 def rand_pause():
-    pause_sec = random.randint(1, 2)
+    pause_sec = random.randint(0, 2)
     time.sleep(pause_sec)
 
 
