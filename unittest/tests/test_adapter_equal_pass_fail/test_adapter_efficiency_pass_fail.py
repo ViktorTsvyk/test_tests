@@ -1,6 +1,7 @@
 """ 38 tests fail, 38 tests pass """
 import random
 import unittest
+import logging
 from devsure.test_base.test_case_base import TestCaseBase
 from .tenv import TEnv
 import time
@@ -15,7 +16,7 @@ class TestOurModel(TestCaseBase):
     def setUp(self) -> None:
         # Set up testing environment
         self.tenv = TEnv()
-        self.log.debug(
+        logging.debug(
             f"Testing the pressure inside the cuff with the target pressure:"
             f" {self.tenv.blood_pressure_md.target_pressure}"
         )
@@ -43,10 +44,10 @@ class TestOurModel(TestCaseBase):
 
     def test_target_pressure(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -89,10 +90,10 @@ class TestOurModel(TestCaseBase):
 
     def test_target_press(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertNotEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -119,10 +120,10 @@ class TestOurModel(TestCaseBase):
 
     def test_target_pressure_value(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -165,10 +166,10 @@ class TestOurModel(TestCaseBase):
 
     def test_pump_target_press(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertNotEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -195,10 +196,10 @@ class TestOurModel(TestCaseBase):
 
     def test_devices_target_pressure(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -241,10 +242,10 @@ class TestOurModel(TestCaseBase):
 
     def test_devices_target_press(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertNotEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -271,10 +272,10 @@ class TestOurModel(TestCaseBase):
 
     def test_devices_target_pressure_value(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -317,10 +318,10 @@ class TestOurModel(TestCaseBase):
 
     def test_devices_pump_target_press(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertNotEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -347,10 +348,10 @@ class TestOurModel(TestCaseBase):
 
     def test_smoke_target_pressure(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -393,10 +394,10 @@ class TestOurModel(TestCaseBase):
 
     def test_smoke_target_press(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertNotEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -423,10 +424,10 @@ class TestOurModel(TestCaseBase):
 
     def test_smoke_target_pressure_value(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -469,10 +470,10 @@ class TestOurModel(TestCaseBase):
 
     def test_smoke_pump_target_press(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertNotEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -482,10 +483,10 @@ class TestOurModel(TestCaseBase):
 
     def test_pump_target_pressure(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertNotEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -514,10 +515,10 @@ class TestOurModel(TestCaseBase):
 
     def test_value_target_pressure(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertNotEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -557,10 +558,10 @@ class TestOurModel(TestCaseBase):
 
     def test_value_info_target_pressure(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
@@ -589,10 +590,10 @@ class TestOurModel(TestCaseBase):
 
     def test_target_pressure_calculation(self) -> None:
         additional_pump_pressure = self.tenv.pump.pumping()
-        self.log.info(f"Additional pump pressure is {additional_pump_pressure}")
+        logging.info(f"Additional pump pressure is {additional_pump_pressure}")
         rand_pause()
         result_pressure = self.tenv.pump.pressure.measurement
-        self.log.info(f"Pressure inside the cuff is {result_pressure}")
+        logging.info(f"Pressure inside the cuff is {result_pressure}")
         rand_pause()
         self.assertEqual(
             first=self.tenv.blood_pressure_md.target_pressure,
