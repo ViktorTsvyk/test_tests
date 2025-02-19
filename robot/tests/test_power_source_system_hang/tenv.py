@@ -1,37 +1,31 @@
 """ Setups the environment for the test case """
-from typing import Annotated
-from devsure.tenv_setup import *
+from devsure.tenv_setup import Find, Create, TEnvSetup
 from devsure.tenv_setup.test import fake_devices as fd
 
 
 class TEnv(TEnvSetup):
     """ All the items of test environment are listed here """
 
-    power_source: Annotated[
-        fd.DCPowerSupply,
-        Find(
-            comment="Power the schematics",
-            kwargs={"voltage_limit": 120.1, "current_limit": 5.1}
-        )
-    ]
+    power_source: fd.DCPowerSupply = Find(
+        comment="Power the schematics",
+        kwargs={"voltage_limit": 120.1, "current_limit": 5.1}
+    )
     # Find with special requirement
-    motor: Annotated[
-        fd.DCMotor,
-        Find(
-            need={
-                "is_brushless": True,
-                "real_physics": False
-            }
-        )]
+    motor: fd.DCMotor = Find(
+        need={
+            "is_brushless": True,
+            "real_physics": False
+        }
+    )
 
     # Just find whatever is available
-    ventilator: Annotated[fd.Ventilator, Find()]
-    adc_temperature: Annotated[fd.ADCVoltage, Find()]
-    adc_pressure: Annotated[fd.ADCAmpere, Find()]
+    ventilator: fd.Ventilator = Find()
+    adc_temperature: fd.ADCVoltage = Find()
+    adc_pressure: fd.ADCAmpere = Find()
 
     # Just create a new instances
-    temperature: Annotated[fd.TemperatureFromVolts, Create(kwargs={"coefficient": 100})]
-    pressure: Annotated[fd.PressureFromAmperes, Create(kwargs={"coefficient": 200})]
+    temperature: fd.TemperatureFromVolts = Create(kwargs={"coefficient": 100})
+    pressure: fd.PressureFromAmperes = Create(kwargs={"coefficient": 200})
 
     def __init__(self):
         """ Setup the environment for the test case.

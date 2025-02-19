@@ -1,6 +1,7 @@
 *** Settings ***
-Library    %{VIRTUAL_ENV}/../devsure/robot_tools/EnvironmentLibrary.py      AS      EL
-Library    %{VIRTUAL_ENV}/../devsure/robot_tools/DynamicDeviceLibrary.py    AS      DEVICES
+Library    devsure/robot_tools/ListenerLibrary.py         AS      _
+Library    devsure/robot_tools/EnvironmentLibrary.py      AS      EL
+Library    devsure/robot_tools/DynamicDeviceLibrary.py    AS      DEVICES
 
 *** Keywords ***
 DCPowerSupply Get Voltage Limit
@@ -10,12 +11,24 @@ DCPowerSupply Get Voltage Limit
     ${result} =        EL.Get Property    ${instance}    voltage_limit
     RETURN             ${result}
 
+DCPowerSupply Set Voltage Limit
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    voltage_limit    @{args}
+
 DCPowerSupply Get Current Limit
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    current_limit
     RETURN             ${result}
+
+DCPowerSupply Set Current Limit
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    current_limit    @{args}
 
 DCPowerSupply Get Voltage
     [Documentation]    Getter
@@ -30,18 +43,6 @@ DCPowerSupply Get Current
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    current
     RETURN             ${result}
-
-DCPowerSupply Set Voltage Limit
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    voltage_limit    @{args}
-
-DCPowerSupply Set Current Limit
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    current_limit    @{args}
 
 DCAdapter Get Input Voltage
     [Documentation]    Attribute
@@ -78,6 +79,12 @@ DCAdapter Get Connected Power Supply
     ${result} =        EL.Get Property    ${instance}    connected_power_supply
     RETURN             ${result}
 
+DCAdapter Set Connected Power Supply
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_power_supply    @{args}
+
 DCAdapter Get Bridge Rectifier Coefficient
     [Documentation]    Getter
     [Arguments]        ${device_name}
@@ -98,12 +105,6 @@ DCAdapter Get Power
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    power
     RETURN             ${result}
-
-DCAdapter Set Connected Power Supply
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_power_supply    @{args}
 
 InflatableCuff Get Cuff Thickness
     [Documentation]    Attribute
@@ -133,33 +134,18 @@ Pump Get Connected Controller
     ${result} =        EL.Get Property    ${instance}    connected_controller
     RETURN             ${result}
 
+Pump Set Connected Controller
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_controller    @{args}
+
 Pump Get Connected Cuff
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    connected_cuff
     RETURN             ${result}
-
-Pump Get Pressure Measurement
-    [Documentation]    Getter
-    [Arguments]        ${device_name}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    ${mid_result} =    EL.Get Property    ${instance}    pressure
-    ${result} =        Set Variable    ${mid_result.measurement}
-    RETURN             ${result}
-
-Pump Get Pressure
-    [Documentation]    Getter
-    [Arguments]        ${device_name}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    ${result} =        EL.Get Property    ${instance}    pressure
-    RETURN             ${result}
-
-Pump Set Connected Controller
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_controller    @{args}
 
 Pump Set Connected Cuff
     [Documentation]    Setter
@@ -172,6 +158,20 @@ Pump Pumping
     [Arguments]        ${device_name}    @{args}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Call Method    ${instance}    pumping    @{args}
+    RETURN             ${result}
+
+Pump Get Pressure
+    [Documentation]    Getter
+    [Arguments]        ${device_name}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    ${result} =        EL.Get Property    ${instance}    pressure
+    RETURN             ${result}
+
+Pump Get Pressure Measurement
+    [Documentation]    Getter
+    [Arguments]        ${device_name}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    ${result} =        EL.Get Property    ${instance}    pressure_measurement
     RETURN             ${result}
 
 BloodPressureMD Get Target Pressure
@@ -200,4 +200,3 @@ BloodPressureMD Provide Power
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Call Method    ${instance}    provide_power    @{args}
     RETURN             ${result}
-

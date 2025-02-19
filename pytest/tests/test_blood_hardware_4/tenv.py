@@ -1,6 +1,5 @@
 """ Setups the environment for the test case """
-from typing import Annotated
-from devsure.tenv_setup import *
+from devsure.tenv_setup import Find, Create, TEnvSetup
 from devsure.tenv_setup.test import fake_devices as fd
 
 
@@ -18,27 +17,21 @@ class TEnv(TEnvSetup):
     comment = "Demonstrate multiple configurations"
     test_config_default = "agilent"
 
-    power_source: Annotated[
-        fd.DCPowerSupply,
-        Find(
-            comment="Power",
-            kwargs={"voltage_limit": 240.1, "current_limit": 6.1}
-        )
-    ]
+    power_source: fd.DCPowerSupply = Find(
+        comment="Power",
+        kwargs={"voltage_limit": 240.1, "current_limit": 6.1}
+    )
     # Find with special requirement
-    power_adapter: Annotated[
-        fd.DCAdapter,
-        Find(
+    power_adapter: fd.DCAdapter = SelectConfig(
+        agilent=Find(
             comment="Agilent DC Power Source",
-            uses_config="agilent",
             target_class=fd.DCAdapterAgilent,
             need={
                 "real_physics": False
             }
         ),
-        Find(
+        siglent=Find(
             comment="Siglent cool DC Power Source",
-            uses_config="siglent",
             target_class=fd.DCAdapterSiglent,
             kwargs={
                 "input_voltage": 120.0,
@@ -50,7 +43,7 @@ class TEnv(TEnvSetup):
                 "real_physics": False
             }
         ),
-        Find(
+        default=Find(
             comment="Cheap default power adapter",
             target_class=fd.DCAdapter,
             kwargs={
@@ -63,21 +56,15 @@ class TEnv(TEnvSetup):
                 "real_physics": False
             }
         )
-    ]
+    )
 
-    cuff: Annotated[
-        fd.InflatableCuff,
-        Find(
-            need={
-                "flexible": False
-            }
-        )
-    ]
+    cuff: fd.InflatableCuff = Find(need={"flexible": False})
+
     # Just find whatever is available
-    pump: Annotated[fd.Pump, Find()]
+    pump: fd.Pump = Find()
 
     # Just create a new instances
-    blood_pressure_md: Annotated[fd.BloodPressureMD, Create(kwargs={"target_pressure": 220})]
+    blood_pressure_md: fd.BloodPressureMD = Create(kwargs={"target_pressure": 220})
 
     def __init__(self) -> None:
         """ Set up the environment for the test case.

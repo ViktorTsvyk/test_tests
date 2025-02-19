@@ -243,3 +243,6 @@ run_tests_status.json
 
 # Ignore requirements.txt checksum file
 requirements_checksum.txt
+
+# Ignore tests reports
+/tests_reports/

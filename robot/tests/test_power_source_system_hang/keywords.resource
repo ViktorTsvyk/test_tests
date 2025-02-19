@@ -1,6 +1,7 @@
 *** Settings ***
-Library    %{VIRTUAL_ENV}/../devsure/robot_tools/EnvironmentLibrary.py      AS      EL
-Library    %{VIRTUAL_ENV}/../devsure/robot_tools/DynamicDeviceLibrary.py    AS      DEVICES
+Library    devsure/robot_tools/ListenerLibrary.py         AS      _
+Library    devsure/robot_tools/EnvironmentLibrary.py      AS      EL
+Library    devsure/robot_tools/DynamicDeviceLibrary.py    AS      DEVICES
 
 *** Keywords ***
 DCPowerSupply Get Voltage Limit
@@ -10,12 +11,24 @@ DCPowerSupply Get Voltage Limit
     ${result} =        EL.Get Property    ${instance}    voltage_limit
     RETURN             ${result}
 
+DCPowerSupply Set Voltage Limit
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    voltage_limit    @{args}
+
 DCPowerSupply Get Current Limit
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    current_limit
     RETURN             ${result}
+
+DCPowerSupply Set Current Limit
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    current_limit    @{args}
 
 DCPowerSupply Get Voltage
     [Documentation]    Getter
@@ -30,18 +43,6 @@ DCPowerSupply Get Current
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    current
     RETURN             ${result}
-
-DCPowerSupply Set Voltage Limit
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    voltage_limit    @{args}
-
-DCPowerSupply Set Current Limit
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    current_limit    @{args}
 
 DCMotor Get Nominal Voltage
     [Documentation]    Attribute
@@ -71,12 +72,24 @@ DCMotor Get Connected Power Supply
     ${result} =        EL.Get Property    ${instance}    connected_power_supply
     RETURN             ${result}
 
+DCMotor Set Connected Power Supply
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_power_supply    @{args}
+
 DCMotor Get Load Torque
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    load_torque
     RETURN             ${result}
+
+DCMotor Set Load Torque
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    load_torque    @{args}
 
 DCMotor Get Nominal Power
     [Documentation]    Getter
@@ -120,18 +133,6 @@ DCMotor Get Power
     ${result} =        EL.Get Property    ${instance}    power
     RETURN             ${result}
 
-DCMotor Set Connected Power Supply
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_power_supply    @{args}
-
-DCMotor Set Load Torque
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    load_torque    @{args}
-
 Ventilator Get Heat Coefficient
     [Documentation]    Attribute
     [Arguments]        ${device_name}
@@ -153,13 +154,11 @@ Ventilator Get Connected Power
     ${result} =        EL.Get Property    ${instance}    connected_power
     RETURN             ${result}
 
-Ventilator Get Heat Measurement
-    [Documentation]    Getter
-    [Arguments]        ${device_name}
+Ventilator Set Connected Power
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
     ${instance} =      DEVICES.Get Device    ${device_name}
-    ${mid_result} =    EL.Get Property    ${instance}    heat
-    ${result} =        Set Variable    ${mid_result.measurement}
-    RETURN             ${result}
+    EL.Set Property    ${instance}    connected_power    @{args}
 
 Ventilator Get Heat
     [Documentation]    Getter
@@ -168,12 +167,11 @@ Ventilator Get Heat
     ${result} =        EL.Get Property    ${instance}    heat
     RETURN             ${result}
 
-Ventilator Get Pressure Measurement
+Ventilator Get Heat Measurement
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
-    ${mid_result} =    EL.Get Property    ${instance}    pressure
-    ${result} =        Set Variable    ${mid_result.measurement}
+    ${result} =        EL.Get Property    ${instance}    heat_measurement
     RETURN             ${result}
 
 Ventilator Get Pressure
@@ -183,11 +181,12 @@ Ventilator Get Pressure
     ${result} =        EL.Get Property    ${instance}    pressure
     RETURN             ${result}
 
-Ventilator Set Connected Power
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
+Ventilator Get Pressure Measurement
+    [Documentation]    Getter
+    [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_power    @{args}
+    ${result} =        EL.Get Property    ${instance}    pressure_measurement
+    RETURN             ${result}
 
 ADCVoltage Get Connected Measurement
     [Documentation]    Getter
@@ -243,18 +242,18 @@ TemperatureFromVolts Get Connected Voltage
     ${result} =        EL.Get Property    ${instance}    connected_voltage
     RETURN             ${result}
 
+TemperatureFromVolts Set Connected Voltage
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_voltage    @{args}
+
 TemperatureFromVolts Get Measurement
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    measurement
     RETURN             ${result}
-
-TemperatureFromVolts Set Connected Voltage
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_voltage    @{args}
 
 PressureFromAmperes Get Coefficient
     [Documentation]    Getter
@@ -270,16 +269,15 @@ PressureFromAmperes Get Connected Ampere
     ${result} =        EL.Get Property    ${instance}    connected_ampere
     RETURN             ${result}
 
-PressureFromAmperes Get Measurement
-    [Documentation]    Getter
-    [Arguments]        ${device_name}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    ${result} =        EL.Get Property    ${instance}    measurement
-    RETURN             ${result}
-
 PressureFromAmperes Set Connected Ampere
     [Documentation]    Setter
     [Arguments]        ${device_name}    @{args}
     ${instance} =      DEVICES.Get Device    ${device_name}
     EL.Set Property    ${instance}    connected_ampere    @{args}
 
+PressureFromAmperes Get Measurement
+    [Documentation]    Getter
+    [Arguments]        ${device_name}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    ${result} =        EL.Get Property    ${instance}    measurement
+    RETURN             ${result}

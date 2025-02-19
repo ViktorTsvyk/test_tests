@@ -2,7 +2,7 @@
 from .tenv import TEnv
 import random
 import time
-from common_items.use_variables import *
+from common_items.use_variables import COMMON_STRING, COMMON_NUMBER, not_global_string
 
 
 # ---------------------------------------

@@ -1,6 +1,5 @@
 """ Setups the environment for the test case """
-from typing import Annotated
-from devsure.tenv_setup import *
+from devsure.tenv_setup import Find, Create, TEnvSetup
 from devsure.tenv_setup.test import fake_devices as fd
 
 
@@ -16,38 +15,31 @@ class TEnv(TEnvSetup):
         defibrillator: Defibrillator
     """
 
-    power_source: Annotated[
-        fd.PowerUnit,
-        Find(
-            comment="Power supply for the Defibrillator",
-            kwargs={"voltage_limit": 440.2, "current_limit": 30.2}
-        )
-    ]
+    power_source: fd.PowerUnit = Find(
+        comment="Power supply for the Defibrillator",
+        kwargs={"voltage_limit": 440.2, "current_limit": 30.2}
+    )
     # Find with special requirement
-    electrodes: Annotated[
-        fd.Electrodes,
-        Find(
-            comment="Electrodes for the Defibrillator",
-            kwargs={"thickness": 1.2},
-            need={
-                "real_physics": True
-            }
-        )]
+    electrodes: fd.Electrodes = Find(
+        comment="Electrodes for the Defibrillator",
+        kwargs={"thickness": 1.2},
+        need={
+            "real_physics": True
+        }
+    )
 
-    speaker: Annotated[
-        fd.Speaker, Find(
-            comment="Speaker for the Defibrillator",
-            need={"real_physics": True}
-        )
-    ]
+    speaker: fd.Speaker = Find(
+        comment="Speaker for the Defibrillator",
+        need={"real_physics": True}
+    )
 
     # Just find whatever is available
-    switch: Annotated[fd.Switch, Find()]
-    microprocessor: Annotated[fd.Microprocessor, Find()]
+    switch: fd.Switch = Find()
+    microprocessor: fd.Microprocessor = Find()
 
     # Just create a new instances
-    capacitor: Annotated[fd.Capacitor, Create()]
-    defibrillator: Annotated[fd.Defibrillator, Create()]
+    capacitor: fd.Capacitor = Create()
+    defibrillator: fd.Defibrillator = Create()
 
     def __init__(self) -> None:
         """ Set up the environment for the test case.

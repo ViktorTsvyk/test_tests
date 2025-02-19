@@ -1,41 +1,35 @@
 """ Setups the environment for the test case """
-from typing import Annotated
-from devsure.tenv_setup import *
+from devsure.tenv_setup import Find, Create, TEnvSetup
 from devsure.tenv_setup.test import fake_devices as fd
 
 
 class TEnv(TEnvSetup):
     """ All the items of test environment are listed here """
 
-    power_source: Annotated[
-        fd.DCPowerSupply,
-        Find(
-            comment="Power",
-            kwargs={"voltage_limit": 240.1, "current_limit": 6.1}
-        )
-    ]
+    power_source: fd.DCPowerSupply = Find(
+        comment="Power",
+        kwargs={"voltage_limit": 240.1, "current_limit": 6.1}
+    )
     # Find with special requirement
-    power_adapter: Annotated[
-        fd.DCAdapter,
-        Find(
-            comment="Adapter",
-            kwargs={
-                "input_voltage": 120.0,
-                "input_current": 0.12,
-                "output_voltage": 6,
-                "output_current": 0.5
-            },
-            need={
-                "real_physics": False
-            }
-        )]
+    power_adapter: fd.DCAdapter = Find(
+        comment="Adapter",
+        kwargs={
+            "input_voltage": 120.0,
+            "input_current": 0.12,
+            "output_voltage": 6,
+            "output_current": 0.5
+        },
+        need={
+            "real_physics": False
+        }
+    )
 
     # Just find whatever is available
-    cuff: Annotated[fd.InflatableCuff, Find()]
-    pump: Annotated[fd.Pump, Find()]
+    cuff: fd.InflatableCuff = Find()
+    pump: fd.Pump = Find()
 
     # Just create a new instances
-    blood_pressure_md: Annotated[fd.BloodPressureMD, Create(kwargs={"target_pressure": 220})]
+    blood_pressure_md: fd.BloodPressureMD = Create(kwargs={"target_pressure": 220})
 
     def __init__(self):
         """ Set up the environment for the test case.

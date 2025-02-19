@@ -1,6 +1,7 @@
 *** Settings ***
-Library    %{VIRTUAL_ENV}/../devsure/robot_tools/EnvironmentLibrary.py      AS      EL
-Library    %{VIRTUAL_ENV}/../devsure/robot_tools/DynamicDeviceLibrary.py    AS      DEVICES
+Library    devsure/robot_tools/ListenerLibrary.py         AS      _
+Library    devsure/robot_tools/EnvironmentLibrary.py      AS      EL
+Library    devsure/robot_tools/DynamicDeviceLibrary.py    AS      DEVICES
 
 *** Keywords ***
 PowerUnit Get Battery Level
@@ -37,12 +38,24 @@ Electrodes Get Material
     ${result} =        EL.Get Property    ${instance}    material
     RETURN             ${result}
 
+Electrodes Set Material
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    material    @{args}
+
 Electrodes Get Thickness
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    thickness
     RETURN             ${result}
+
+Electrodes Set Thickness
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    thickness    @{args}
 
 Electrodes Get Contact Area
     [Documentation]    Getter
@@ -51,12 +64,24 @@ Electrodes Get Contact Area
     ${result} =        EL.Get Property    ${instance}    contact_area
     RETURN             ${result}
 
+Electrodes Set Contact Area
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    contact_area    @{args}
+
 Electrodes Get Rhythm Data
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    rhythm_data
     RETURN             ${result}
+
+Electrodes Set Rhythm Data
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    rhythm_data    @{args}
 
 Electrodes Get Charge Level
     [Documentation]    Getter
@@ -65,42 +90,18 @@ Electrodes Get Charge Level
     ${result} =        EL.Get Property    ${instance}    charge_level
     RETURN             ${result}
 
+Electrodes Set Charge Level
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    charge_level    @{args}
+
 Electrodes Get Efficiency
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    efficiency
     RETURN             ${result}
-
-Electrodes Set Material
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    material    @{args}
-
-Electrodes Set Thickness
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    thickness    @{args}
-
-Electrodes Set Contact Area
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    contact_area    @{args}
-
-Electrodes Set Rhythm Data
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    rhythm_data    @{args}
-
-Electrodes Set Charge Level
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    charge_level    @{args}
 
 Electrodes Detect Heart Rhythm
     [Documentation]    Method
@@ -156,12 +157,24 @@ Microprocessor Get Connected Power Supply
     ${result} =        EL.Get Property    ${instance}    connected_power_supply
     RETURN             ${result}
 
+Microprocessor Set Connected Power Supply
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_power_supply    @{args}
+
 Microprocessor Get Connected Electrodes
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    connected_electrodes
     RETURN             ${result}
+
+Microprocessor Set Connected Electrodes
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_electrodes    @{args}
 
 Microprocessor Get Connected Capacitor
     [Documentation]    Getter
@@ -170,6 +183,12 @@ Microprocessor Get Connected Capacitor
     ${result} =        EL.Get Property    ${instance}    connected_capacitor
     RETURN             ${result}
 
+Microprocessor Set Connected Capacitor
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_capacitor    @{args}
+
 Microprocessor Get Connected Switch
     [Documentation]    Getter
     [Arguments]        ${device_name}
@@ -177,36 +196,18 @@ Microprocessor Get Connected Switch
     ${result} =        EL.Get Property    ${instance}    connected_switch
     RETURN             ${result}
 
+Microprocessor Set Connected Switch
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_switch    @{args}
+
 Microprocessor Get Connected Speaker
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    connected_speaker
     RETURN             ${result}
-
-Microprocessor Set Connected Power Supply
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_power_supply    @{args}
-
-Microprocessor Set Connected Electrodes
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_electrodes    @{args}
-
-Microprocessor Set Connected Capacitor
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_capacitor    @{args}
-
-Microprocessor Set Connected Switch
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_switch    @{args}
 
 Microprocessor Set Connected Speaker
     [Documentation]    Setter
@@ -235,6 +236,12 @@ Capacitor Get Connected Power Supply
     ${result} =        EL.Get Property    ${instance}    connected_power_supply
     RETURN             ${result}
 
+Capacitor Set Connected Power Supply
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_power_supply    @{args}
+
 Capacitor Get Connected Electrodes
     [Documentation]    Getter
     [Arguments]        ${device_name}
@@ -242,24 +249,18 @@ Capacitor Get Connected Electrodes
     ${result} =        EL.Get Property    ${instance}    connected_electrodes
     RETURN             ${result}
 
+Capacitor Set Connected Electrodes
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_electrodes    @{args}
+
 Capacitor Get Charge Voltage
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    charge_voltage
     RETURN             ${result}
-
-Capacitor Set Connected Power Supply
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_power_supply    @{args}
-
-Capacitor Set Connected Electrodes
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_electrodes    @{args}
 
 Capacitor Set Charge Voltage
     [Documentation]    Setter
@@ -288,18 +289,18 @@ Defibrillator Get Connected Electrodes
     ${result} =        EL.Get Property    ${instance}    connected_electrodes
     RETURN             ${result}
 
+Defibrillator Set Connected Electrodes
+    [Documentation]    Setter
+    [Arguments]        ${device_name}    @{args}
+    ${instance} =      DEVICES.Get Device    ${device_name}
+    EL.Set Property    ${instance}    connected_electrodes    @{args}
+
 Defibrillator Get Connected Microprocessor
     [Documentation]    Getter
     [Arguments]        ${device_name}
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Get Property    ${instance}    connected_microprocessor
     RETURN             ${result}
-
-Defibrillator Set Connected Electrodes
-    [Documentation]    Setter
-    [Arguments]        ${device_name}    @{args}
-    ${instance} =      DEVICES.Get Device    ${device_name}
-    EL.Set Property    ${instance}    connected_electrodes    @{args}
 
 Defibrillator Set Connected Microprocessor
     [Documentation]    Setter
@@ -313,4 +314,3 @@ Defibrillator Defibrillate
     ${instance} =      DEVICES.Get Device    ${device_name}
     ${result} =        EL.Call Method    ${instance}    defibrillate    @{args}
     RETURN             ${result}
-
