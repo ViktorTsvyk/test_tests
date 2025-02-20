@@ -5,7 +5,10 @@ from .tenv import TEnv
 import time
 import random
 import logging
-from common_items.use_variables import *
+from common_items.use_variables import (
+    not_global_string, not_global_list, not_global_dict, COMMON_LIST, COMMON_DICT, COMMON_STRING
+)
+
 
 # ---------------------------------------
 def rand_pause():

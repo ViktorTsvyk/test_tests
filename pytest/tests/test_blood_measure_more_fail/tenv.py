@@ -1,5 +1,5 @@
 """ Setups the environment for the test case """
-from devsure.tenv_setup import Find, Create, TEnvSetup
+from devsure.tenv_setup import Find, SelectConfig, Create, TEnvSetup
 from devsure.tenv_setup.test import fake_devices as fd
 
 
