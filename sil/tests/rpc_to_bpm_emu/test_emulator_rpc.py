@@ -3,16 +3,9 @@
 import unittest
 import time
 import os
-from typing import Final
 
 from .tenv import TEnv
 from devsure.rpc.test.rpc_to_bpm_emu.bpm_emulator_rpc import PinState
-
-# Where to store captured images
-DEVSURE_REPORT_FOLDER: Final[str] = os.environ.get(
-    "DEVSURE_REPORT_FOLDER",
-    os.getcwd()  # TODO: DEVSURE_REPORT_FOLDER shall always be present
-)
 
 
 class TestConnectionEstablished(unittest.TestCase):
@@ -69,12 +62,15 @@ class TestConnectionEstablished(unittest.TestCase):
         )
         remember_display_refreshes = new_refreshes
 
+        # Where to store captured images
+        report_folder = os.environ["DEVSURE_REPORT_FOLDER"]
+
         for i in range(10):
             print(f"\n ------------------\n Pressing button BUTTON1 {i+1} of 10")
             self.tenv.emulator.click_pin(PinState.ButtonDown)
 
             # Save captured image
-            save_at = f"{DEVSURE_REPORT_FOLDER}/Image{i}.png"
+            save_at = f"{report_folder}/Image{i}.png"
             print(f"!!!!!!!!!!!!!!! Saving image to {save_at}")
             self.tenv.emulator.screen_image.save(save_at)
 
