@@ -14,6 +14,21 @@ BpmEmulatorRpc Get Rpc Api Checksum
     [Arguments]        ${name}
     RETURN             ${tenv.${name}.rpc_api_checksum}
 
+BpmEmulatorRpc Get Callback
+    [Documentation]    Attribute
+    [Arguments]        ${name}
+    RETURN             ${tenv.${name}.Callback}
+
+BpmEmulatorRpc Get Form
+    [Documentation]    Attribute
+    [Arguments]        ${name}
+    RETURN             ${tenv.${name}.Form}
+
+BpmEmulatorRpc Get Enabled
+    [Documentation]    Attribute
+    [Arguments]        ${name}
+    RETURN             ${tenv.${name}.enabled}
+
 BpmEmulatorRpc Get Pending Interrupts
     [Documentation]    Attribute
     [Arguments]        ${name}
@@ -33,6 +48,18 @@ BpmEmulatorRpc Get Bytes Per Color
     [Documentation]    Attribute
     [Arguments]        ${name}
     RETURN             ${tenv.${name}.BYTES_PER_COLOR}
+
+BpmEmulatorRpc Connect Ui
+    [Documentation]    Method
+    [Arguments]        ${name}    @{args}
+    ${result} =        Call Method    ${tenv.${name}}    connect_ui    @{args}
+    RETURN             ${result}
+
+BpmEmulatorRpc Click Button
+    [Documentation]    Method
+    [Arguments]        ${name}    @{args}
+    ${result} =        Call Method    ${tenv.${name}}    click_button    @{args}
+    RETURN             ${result}
 
 BpmEmulatorRpc Add Interrupt
     [Documentation]    Method
@@ -96,6 +123,18 @@ BpmEmulatorRpc Framework Display Screen
     ${result} =        Call Method    ${tenv.${name}}    framework_display_screen    @{args}
     RETURN             ${result}
 
+BpmEmulatorRpc Framework Enable Pump
+    [Documentation]    Method
+    [Arguments]        ${name}    @{args}
+    ${result} =        Call Method    ${tenv.${name}}    framework_enable_pump    @{args}
+    RETURN             ${result}
+
+BpmEmulatorRpc Framework Enable Valve
+    [Documentation]    Method
+    [Arguments]        ${name}    @{args}
+    ${result} =        Call Method    ${tenv.${name}}    framework_enable_valve    @{args}
+    RETURN             ${result}
+
 BpmEmulatorRpc Emulator Start Emulation
     [Documentation]    Method
     [Arguments]        ${name}    @{args}
@@ -112,4 +151,10 @@ BpmEmulatorRpc Emulator Echo
     [Documentation]    Method
     [Arguments]        ${name}    @{args}
     ${result} =        Call Method    ${tenv.${name}}    emulator_echo    @{args}
+    RETURN             ${result}
+
+BpmEmulatorRpc Emulator Adc Measurement
+    [Documentation]    Method
+    [Arguments]        ${name}    @{args}
+    ${result} =        Call Method    ${tenv.${name}}    emulator_adc_measurement    @{args}
     RETURN             ${result}

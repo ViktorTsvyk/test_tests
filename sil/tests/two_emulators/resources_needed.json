@@ -1,0 +1,17 @@
+{
+    "title": "Test case that interacts with the emulators",
+    "comment": "Demonstrate basic RPC & Web UI interactions with the emulators",
+    "find": {
+        "emulator": {
+            "target_class": "devsure.rpc.test.rpc_to_bpm_emu.bpm_emulator_rpc.BpmEmulatorRpc"
+        },
+        "emulator_second": {
+            "target_class": "devsure.rpc.test.rpc_to_bpm_emu.bpm_emulator_rpc.BpmEmulatorRpc"
+        }
+    },
+    "create": {
+        "view": {
+            "target_class": "devsure_test_samples.emulator_example.two_emulators.tenv.View"
+        }
+    }
+}
