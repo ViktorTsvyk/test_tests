@@ -12,12 +12,3 @@ class TEnv(TEnvSetup):
     comment = "Demonstrate basic RPC interaction with the emulator"
 
     emulator: BpmEmulatorRpc = Find()
-
-    def tear_down(self):
-        """ Shut down Emulator """
-        try:
-            self.emulator.mark_for_exit()
-            self.emulator.emulator_stop_emulation()
-            time.sleep(2)
-        except Exception as e:
-            print(f"tearDown exception {e}")
