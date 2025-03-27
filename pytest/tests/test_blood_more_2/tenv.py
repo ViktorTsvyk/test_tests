@@ -15,7 +15,7 @@ class TEnv(TEnvSetup):
     """
     title = "Test case that exists in three configurations"
     comment = "Demonstrate multiple configurations"
-    test_config_default = "agilent"
+    test_config = "agilent"
 
     power_source: fd.DCPowerSupply = Find(
         comment="Power",
@@ -64,7 +64,7 @@ class TEnv(TEnvSetup):
         )
     )
 
-    pump: fd.Pump = Find(need={"splitter": True})
+    pump: fd.Pump = Find()
 
     # Just find whatever is available
     cuff: fd.InflatableCuff = Find()
@@ -92,19 +92,3 @@ class TEnv(TEnvSetup):
 
         # Cuff is connected to the pump
         self.pump.connected_cuff = self.cuff
-
-    def tear_down(self) -> None:
-        """ Demo for some useful cleanup, if needed,
-        just skip that if not needed
-
-        NOTE: this method is not called automatically,
-        you should call it manually in the test case, if needed
-        (Call that from those places in your test case
-         that correspond to right cleanup location)
-
-        This is just a demo with fake devices, so no real cleanup is needed,
-        but in real life you may need to do some cleanup here
-        depending on kind of devices you are using
-        (or create TEnv instance ONLY ONCE PER PROCESS
-         and reuse it for all tests)"""
-        pass

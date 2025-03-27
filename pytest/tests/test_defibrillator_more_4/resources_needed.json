@@ -15,10 +15,6 @@
             "comment": "Electrodes for the Defibrillator",
             "kwargs": {
                 "thickness": 1.2
-            },
-            "need": {
-                "real_physics": true,
-                "h_conductive": false
             }
         },
         "microprocessor": {

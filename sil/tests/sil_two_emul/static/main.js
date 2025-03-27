@@ -1,13 +1,13 @@
 const dynamicImage = document.getElementById("dynamic-image")
 const dynamicImageSecond = document.getElementById("dynamic-image-second")
 
-const conn1 = SocketConnection(getTEnvObjectData("emulator").namespace)
-const conn2 = SocketConnection(getTEnvObjectData("emulator_second").namespace)
+const socket1 = io(getTEnvObjectData("emulator").namespace)
+const socket2 = io(getTEnvObjectData("emulator_second").namespace)
 
-conn1.socket.on("image", image => {
+socket1.on("image", image => {
     dynamicImage.src = image
 })
 
-conn2.socket.on("image", image => {
+socket2.on("image", image => {
     dynamicImageSecond.src = image
 })

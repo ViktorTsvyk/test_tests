@@ -18,7 +18,6 @@ class TEnv(TEnvSetup):
     power_source: fd.PowerUnit = Find(
         comment="Power supply for the Defibrillator",
         kwargs={"voltage_limit": 440.2, "current_limit": 30.2},
-        need={"brand": "AllowTC"}
     )
     # Find with special requirement
     electrodes: fd.Electrodes = Find(
@@ -70,19 +69,3 @@ class TEnv(TEnvSetup):
 
         # Defibrillator is connected to the microprocessor
         self.defibrillator.connected_microprocessor = self.microprocessor
-
-    def tear_down(self) -> None:
-        """ Demo for some useful cleanup, if needed,
-        just skip that if not needed
-
-        NOTE: this method is not called automatically,
-        you should call it manually in the test case, if needed
-        (Call that from those places in your test case
-         that correspond to right cleanup location)
-
-        This is just a demo with fake devices, so no real cleanup is needed,
-        but in real life you may need to do some cleanup here
-        depending on kind of devices you are using
-        (or create TEnv instance ONLY ONCE PER PROCESS
-         and reuse it for all tests)"""
-        pass

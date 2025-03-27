@@ -21,6 +21,10 @@ from .tenv import TEnv
 import random
 import time
 
+@pytest.fixture(scope="function")
+def tenv(tenv_func) -> TEnv:
+    return tenv_func
+
 # ---------------------------------------
 def rand_pause():
     pause_sec = random.randint(0, 1)

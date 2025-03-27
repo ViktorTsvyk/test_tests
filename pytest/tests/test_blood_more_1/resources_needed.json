@@ -24,10 +24,7 @@
             }
         },
         "cuff": {
-            "target_class": "devsure.tenv_setup.test.fake_devices.InflatableCuff",
-            "need": {
-                "flexible": true
-            }
+            "target_class": "devsure.tenv_setup.test.fake_devices.InflatableCuff"
         },
         "pump": {
             "target_class": "devsure.tenv_setup.test.fake_devices.Pump"

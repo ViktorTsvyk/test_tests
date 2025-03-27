@@ -35,7 +35,7 @@ class TEnv(TEnvSetup):
         }
     )
 
-    cuff: fd.InflatableCuff = Find(need={"flexible": True})
+    cuff: fd.InflatableCuff = Find()
 
     # Just find whatever is available
     pump: fd.Pump = Find()
@@ -63,19 +63,3 @@ class TEnv(TEnvSetup):
 
         # Cuff is connected to the pump
         self.pump.connected_cuff = self.cuff
-
-    def tear_down(self) -> None:
-        """ Demo for some useful cleanup, if needed,
-        just skip that if not needed
-
-        NOTE: this method is not called automatically,
-        you should call it manually in the test case, if needed
-        (Call that from those places in your test case
-         that correspond to right cleanup location)
-
-        This is just a demo with fake devices, so no real cleanup is needed,
-        but in real life you may need to do some cleanup here
-        depending on kind of devices you are using
-        (or create TEnv instance ONLY ONCE PER PROCESS
-         and reuse it for all tests)"""
-        pass

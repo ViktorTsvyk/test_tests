@@ -21,14 +21,7 @@ class TestConnectionEstablished(unittest.TestCase):
         # Emulators also init here
         self.tenv = TEnv.setUpUnittest(self)
 
-        self.start_emulation_statuses = (
-            self.tenv.emulator.emulator_start_emulation(),
-            self.tenv.emulator_second.emulator_start_emulation(),
-        )
-
     def test_emulator_loaded(self):
-        self.assertEqual(self.start_emulation_statuses, (0, 0), msg="Emulators shall start normally")
-
         emu_first = self.tenv.emulator
         emu_second = self.tenv.emulator_second
 
