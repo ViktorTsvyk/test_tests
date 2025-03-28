@@ -1,9 +1,0 @@
-from devsure.rpc.test.rpc_to_bpm_emu.bpm_web_ui import View
-from devsure.tenv_setup import Create, TEnvSetup, Find
-from devsure.rpc.test.rpc_to_bpm_emu.bpm_emulator_rpc import BpmEmulatorRpc
-
-
-class TEnv(TEnvSetup):
-    emulator: BpmEmulatorRpc = Find()
-
-    view: View = Create()
