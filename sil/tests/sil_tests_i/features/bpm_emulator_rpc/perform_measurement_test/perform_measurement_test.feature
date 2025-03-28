@@ -3,7 +3,7 @@ Feature: Test perform measurement functionality
   @BPMFR017, @BPMFR020
   @TC-000004
   @bpm_emulator_rpc
-  Scenario: Test
+  Scenario: Test perform measurement
     Given Start bpm emulator rpc
     Then Verify button Enter menu is selected
     When Click button ok
