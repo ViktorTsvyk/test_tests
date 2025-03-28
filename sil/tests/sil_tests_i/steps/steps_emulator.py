@@ -53,10 +53,18 @@ def release_button(context: Context, button):
 @when(parsers.cfparse("Device waiting {time} milliseconds"))
 def device_waiting(context: Context, time):
     try:
-        SimulatedThread.sleep_ms(int(time))
+        total_time = int(time)
+        interval = 1000
+        waited_time = 0
+        while waited_time < total_time:
+            SimulatedThread.sleep_ms(interval)
+            waited_time += interval
+            print(f"Waited {waited_time}/{total_time} ms...")
+
+        print(f"Finished waiting for {total_time} ms successfully.")
     except Exception as e:
         print(f"Error while waiting: {e}")
-        Assertions.fail("Device waiting encountered an error.")
+        Assertions.fail(f"Device waiting encountered an error: {e}")
 
 
 @then("Verify current screen image is equal provided one, ignoring the timestamp section")
