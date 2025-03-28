@@ -2,10 +2,10 @@ import time
 
 from PIL.Image import Image
 from pathlib import Path
-from tests.Core.image_manager.image_manager import convert_img_to_np_array, convert_np_array_to_img, text_recognition, \
+from sil_test_i.Core.image_manager.image_manager import convert_img_to_np_array, convert_np_array_to_img, text_recognition, \
     get_image_via_np_array_by_path, get_text_center_coordinates, create_and_apply_mask, is_image_contains_sub_image, \
     convert_to_bgr, preprocess_image, preprocess_image2
-from tests.Core.wait_manager.wait_manager import apply_waiter
+from sil_test_i.Core.wait_manager.wait_manager import apply_waiter
 
 
 @apply_waiter(lambda result: result is True)

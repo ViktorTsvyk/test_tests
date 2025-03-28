@@ -1,6 +1,6 @@
 from pathlib import Path
 from pytest_bdd import scenarios
-from tests.steps import *
+from sil_test_i.steps import *
 
 features_path = Path(__file__).parent / "features"
 
