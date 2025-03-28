@@ -16,6 +16,10 @@ class Assertions:
     def assert_false(condition, msg=None):
         assert not condition, msg or f"Expect False, but actually {condition}"
 
+    @staticmethod
+    def fail(msg=None):
+        assert False, msg or "Test failed explicitly"
+
     # @staticmethod
     # def assert_in(item, collection, msg=None):
     #     assert item in collection, msg or f"Element {item} not found {collection}"

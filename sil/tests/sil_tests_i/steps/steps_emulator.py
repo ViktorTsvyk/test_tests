@@ -20,6 +20,10 @@ MEASUREMENT_STOPPED = "Measurement was stopped"
 PRESSURE_CUFF_ABBR = "HG"
 
 
+@then(parsers.cfparse("Step {step_number} execution"))
+def step_exec(context, step_number):
+    print(f"Executing step {step_number}")
+
 @given("Start bpm emulator rpc")
 def start_bpm_emulator_rpc(context: Context, tenv_func: TEnv):
     context.tenv = tenv_func
@@ -48,7 +52,11 @@ def release_button(context: Context, button):
 
 @when(parsers.cfparse("Device waiting {time} milliseconds"))
 def device_waiting(context: Context, time):
-    SimulatedThread.sleep_ms(int(time))
+    try:
+        SimulatedThread.sleep_ms(int(time))
+    except Exception as e:
+        print(f"Error while waiting: {e}")
+        Assertions.fail("Device waiting encountered an error.")
 
 
 @then("Verify current screen image is equal provided one, ignoring the timestamp section")
