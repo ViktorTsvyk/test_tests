@@ -5,14 +5,14 @@ import numpy as np
 from pytest_bdd import given, when, then, parsers
 from devsure.rpc.test.rpc_to_bpm_emu.bpm_emulator_rpc import PinState
 from devsure.time_simulator import SimulatedThread
-from sil_test_i.Core.assertions.Assertions import Assertions
-from sil_test_i.Core.context.context import Context
-from sil_test_i.Core.image_manager.image_manager import convert_np_array_to_img, convert_img_to_np_array, \
+from sil_tests_i.Core.assertions.Assertions import Assertions
+from sil_tests_i.Core.context.context import Context
+from sil_tests_i.Core.image_manager.image_manager import convert_np_array_to_img, convert_img_to_np_array, \
     get_text_center_coordinates, create_and_apply_mask, create_mask, apply_mask, is_text_present, get_text
-from sil_test_i.tenv import TEnv
+from sil_tests_i.tenv import TEnv
 from PIL import Image
 
-from sil_test_i.pageobjects.components.button.button import is_button_present, is_button_selected
+from sil_tests_i.pageobjects.components.button.button import is_button_present, is_button_selected
 
 MEASUREMENT_FINISHED = "Measurement is finished"
 MEASUREMENT_ERROR_VALVE_OFF = "Pressure remains unchanged"

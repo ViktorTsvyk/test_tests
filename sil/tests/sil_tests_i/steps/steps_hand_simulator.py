@@ -1,7 +1,7 @@
 from pytest_bdd import when, parsers
 
-from sil_test_i.Core.assertions.Assertions import Assertions
-from sil_test_i.Core.context.context import Context
+from sil_tests_i.Core.assertions.Assertions import Assertions
+from sil_tests_i.Core.context.context import Context
 
 @when(parsers.parse("Turn {state} the valve"))
 def click_button(context: Context, state):
