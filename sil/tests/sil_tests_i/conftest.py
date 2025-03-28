@@ -1,6 +1,6 @@
 import pytest
 from devsure.time_simulator import SimulatedTimeScope, time_runner
-from tests.Core.context.context import Context
+from sil_tests_i.Core.context.context import Context
 
 pytest_plugins = ["devsure.fixtures.conftest"]
 
