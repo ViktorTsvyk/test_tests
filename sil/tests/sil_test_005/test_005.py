@@ -5,7 +5,10 @@ from lib.lib import load_images, verify_image
 from devsure.rpc.test.rpc_to_bpm_emu.tools import PinState
 from devsure.time_simulator import SimulatedTimeScope, SimulatedThread
 
-def test_measurement_cancel(tenv: TEnv) -> None:
+def test_measurement_cancel(tenv_func: TEnv) -> None:
+    print("5 TEST STARTED!!!!! ==============================================================")
+
+    tenv = tenv_func
     images = load_images()
 
     with SimulatedTimeScope(f"Test Case"):
@@ -49,5 +52,4 @@ def test_measurement_cancel(tenv: TEnv) -> None:
         tenv.emulator.click_button(PinState.ButtonOk)
         verify_image(tenv.emulator.screen_image, images.Measurement_Canceled, images.mask_measurement_canceled)
 
-
-
+    print("1 TEST STARTED!!!!! ==============================================================")

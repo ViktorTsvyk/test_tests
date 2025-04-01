@@ -1,7 +1,10 @@
+import logging
 import os
 from PIL import Image
 from types import SimpleNamespace
 
+
+logging.getLogger("PIL.PngImagePlugin").setLevel(logging.INFO)
 
 images_dir = os.path.dirname(os.path.abspath(__file__)) + "/Screens"
 

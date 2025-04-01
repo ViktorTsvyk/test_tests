@@ -5,7 +5,9 @@ from lib.lib import load_images, verify_image
 from devsure.rpc.test.rpc_to_bpm_emu.tools import PinState
 from devsure.time_simulator import SimulatedTimeScope, SimulatedThread
 
-def test_measurement_nominal(tenv: TEnv) -> None:
+def test_measurement_nominal(tenv_func: TEnv) -> None:
+    tenv = tenv_func
+    print("4 TEST STARTED!!!!! ==============================================================")
     images = load_images()
 
     with SimulatedTimeScope(f"Test Case"):
@@ -41,3 +43,4 @@ def test_measurement_nominal(tenv: TEnv) -> None:
         #assert tenv.emulator.is_pump_enabled == False
         #assert tenv.emulator.is_valve_enabled == True
 
+    print("4 TEST STARTED!!!!! ==============================================================")
