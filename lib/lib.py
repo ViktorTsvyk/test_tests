@@ -1,7 +1,10 @@
+import logging
 import os
 from PIL import Image
 from types import SimpleNamespace
 
+
+logging.getLogger("PIL.PngImagePlugin").setLevel(logging.INFO)
 
 images_dir = os.path.dirname(os.path.abspath(__file__)) + "/Screens"
 
@@ -24,7 +27,8 @@ def capture_image(image, suffix = None) -> None:
     image.save(f"{fileName}.png", format="png")
 capture_image._counter = 0
 
-def verify_image(actual, expected, mask = None):
+
+def verify_image(actual: Image.Image, expected: Image.Image, mask: Image.Image = None):
     """Compare `actual` and `expected` images using `mask`, and generate a difference image.
 
     - Matching pixels → White (255, 255, 255)
@@ -32,9 +36,9 @@ def verify_image(actual, expected, mask = None):
     - Non-matching pixels → Red (255, 0, 0)
 
     Args:
-        actual (Image): The actual image.
-        expected (Image): The expected image.
-        mask (Image): The mask image (black = ignore, white = compare).
+        actual: The actual image.
+        expected: The expected image.
+        mask: The mask image (black = ignore, white = compare).
 
     Returns:
         Image: The difference image.
@@ -83,7 +87,5 @@ def verify_image(actual, expected, mask = None):
     actual.save(f"{report_folder}/img_{capture_image._counter}_actual.png", format="png")
     expected.save(f"{report_folder}/img_{capture_image._counter}_expected.png", format="png")
     diff_image.save(f"{report_folder}/img_{capture_image._counter}_difference.png", format="png")
-
-    assert all_match == True
 
     return all_match
