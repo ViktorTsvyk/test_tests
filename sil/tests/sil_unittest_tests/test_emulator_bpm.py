@@ -1,37 +1,26 @@
 """ Describe PRC interface for the Emulator """
 
-import unittest
-import time
 import os
+
+from devsure.test_base.test_case_base import TestCaseBase
+from devsure.time_simulator.simulation import simulated_sleep_ms
 
 from .tenv import TEnv
 from devsure.rpc.test.rpc_to_bpm_emu.bpm_emulator_rpc import PinState
 
 
-class TestConnectionEstablished(unittest.TestCase):
-    def setUp(self) -> None:
-        """ Start Emulator """
-        self.tenv = TEnv()
-        self.start_emulation_status = self.tenv.emulator.emulator_start_emulation()
+class TestConnectionEstablished(TestCaseBase):
+    tenv: TEnv
 
     def test_emulator_loaded(self):
-        self.assertEqual(
-            0, self.start_emulation_status,
-            msg="Emulator shall start normally"
-        )
-        self.assertEqual(
-            0, self.start_emulation_status,
-            msg="Other API provided by the emulator shall work as well"
-        )
-
-        time.sleep(1.5)  # let display bytes to arrive for sure
+        simulated_sleep_ms(200)  # let display bytes to arrive for sure
 
         remember_display_refreshes = self.tenv.emulator.display_refreshes
         self.assertGreater(
             remember_display_refreshes, 0, msg="There shall be display refreshes since start"
         )
 
-        time.sleep(1)
+        simulated_sleep_ms(1000)
 
         new_refreshes = self.tenv.emulator.display_refreshes
         self.assertEqual(
@@ -67,4 +56,4 @@ class TestConnectionEstablished(unittest.TestCase):
                 msg="There shall be display refreshes while buttons were pressed"
             )
             remember_display_refreshes = new_refreshes
-            time.sleep(1)
+            simulated_sleep_ms(1000)

@@ -31,7 +31,7 @@ class TEnv(TEnvSetup):
     # Just create a new instances
     blood_pressure_md: fd.BloodPressureMD = Create(kwargs={"target_pressure": 220})
 
-    def __init__(self):
+    def setup(self):
         """ Set up the environment for the test case.
         Real devices are usually connected physically,
         here we just create fake devices for demo purposes,
@@ -51,6 +51,3 @@ class TEnv(TEnvSetup):
 
         # Cuff is connected to the pump
         self.pump.connected_cuff = self.cuff
-
-    def tear_down(self):
-        pass

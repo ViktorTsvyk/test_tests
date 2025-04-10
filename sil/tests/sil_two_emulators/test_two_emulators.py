@@ -1,31 +1,24 @@
 """ Describe PRC interface for the Emulator """
 
-import unittest
 import os
+
+from devsure.test_base.test_case_base import TestCaseBase
 
 from .tenv import TEnv
 from devsure.rpc.test.rpc_to_bpm_emu.bpm_emulator_rpc import PinState
 
 from devsure.time_simulator import time_runner
-from devsure.time_simulator.simulation import SimulatedTimeScope, simulated_sleep_ms
+from devsure.time_simulator.simulation import simulated_sleep_ms
 
 from datetime import datetime
 
 
-class TestConnectionEstablished(unittest.TestCase):
-    def setUp(self) -> None:
-        """ Setup execution environment """
-        # Simulation must restart before Emulators will use it
-        time_runner.reset_to_initial_state()
-
-        # Emulators also init here
-        self.tenv = TEnv.setUpUnittest(self)
+class TestConnectionEstablished(TestCaseBase):
+    tenv: TEnv
 
     def test_emulator_loaded(self):
         emu_first = self.tenv.emulator
         emu_second = self.tenv.emulator_second
-
-        self.enterContext(SimulatedTimeScope("test_emulator_loaded"))
 
         print(f"Test started at {time_runner.current_time_ms}")
 

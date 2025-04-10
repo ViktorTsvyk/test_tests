@@ -1,13 +1,11 @@
 """ Describe PRC interface for the Emulator """
+from devsure.test_base.test_case_base import TestCaseBase
 
-import unittest
 from .tenv import TEnv
 
 
-class TestConnectionEstablished(unittest.TestCase):
-    def setUp(self) -> None:
-        """ Start Emulator """
-        self.tenv = TEnv.setUpUnittest(self)
+class TestConnectionEstablished(TestCaseBase):
+    tenv: TEnv
 
     def test_emulator_loaded(self):
         print("\n\n\n_________________________________________________________________")

@@ -1,6 +1,6 @@
 {
-    "title": "Test case that interacts with the emulator",
-    "comment": "Demonstrate basic RPC interaction with the emulator",
+    "title": "Blood pressure measurement Nominal",
+    "comment": "Nominal blood pressure measurement procedure using a Human simulator",
     "find": {
         "emulator": {
             "target_class": "devsure.rpc.test.rpc_to_bpm_emu.bpm_emulator_rpc.BpmEmulatorRpc"

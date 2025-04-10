@@ -2,6 +2,7 @@ import logging
 import os
 from PIL import Image
 from types import SimpleNamespace
+from devsure.formal import GetFormalReport
 
 
 logging.getLogger("PIL.PngImagePlugin").setLevel(logging.INFO)
@@ -84,8 +85,14 @@ def verify_image(actual: Image.Image, expected: Image.Image, mask: Image.Image =
 
     # report_folder = "captures"
     report_folder = os.getenv("DEVSURE_REPORT_FOLDER")
-    actual.save(f"{report_folder}/img_{capture_image._counter}_actual.png", format="png")
-    expected.save(f"{report_folder}/img_{capture_image._counter}_expected.png", format="png")
-    diff_image.save(f"{report_folder}/img_{capture_image._counter}_difference.png", format="png")
+    actual_file = f"img_{capture_image._counter}_actual.png"
+    expected_file = f"img_{capture_image._counter}_expected.png"
+    diff_file = f"img_{capture_image._counter}_difference.png"
+
+    actual.save(f"{report_folder}/{actual_file}", format="png")
+    expected.save(f"{report_folder}/{expected_file}", format="png")
+    diff_image.save(f"{report_folder}/{diff_file}", format="png")
+
+    GetFormalReport().register_evidence("image", actual_file, expected_file, diff_file)
 
     return all_match

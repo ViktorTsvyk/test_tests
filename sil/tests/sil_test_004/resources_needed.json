@@ -1,6 +1,6 @@
 {
-    "title": "Test case that interacts with the emulator",
-    "comment": "Demonstrate basic RPC interaction with the emulator",
+    "title": "Blood pressure measurement Negative",
+    "comment": "Testing timeout on cuff inflation",
     "find": {
         "emulator": {
             "target_class": "devsure.rpc.test.rpc_to_bpm_emu.bpm_emulator_rpc.BpmEmulatorRpc"

@@ -37,7 +37,7 @@ class TEnv(TEnvSetup):
     capacitor: fd.Capacitor = Create()
     defibrillator: fd.Defibrillator = Create()
 
-    def __init__(self) -> None:
+    def setup(self):
         """ Set up the environment for the test case.
         Real devices are usually connected physically,
         here we just create fake devices for demo purposes,

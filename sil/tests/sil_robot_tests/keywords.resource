@@ -49,16 +49,22 @@ BpmEmulatorRpc Get Bytes Per Color
     [Arguments]        ${name}
     RETURN             ${tenv.${name}.BYTES_PER_COLOR}
 
-BpmEmulatorRpc Connect Ui
-    [Documentation]    Method
-    [Arguments]        ${name}    @{args}
-    ${result} =        Call Method    ${tenv.${name}}    connect_ui    @{args}
-    RETURN             ${result}
-
 BpmEmulatorRpc Click Button
     [Documentation]    Method
     [Arguments]        ${name}    @{args}
     ${result} =        Call Method    ${tenv.${name}}    click_button    @{args}
+    RETURN             ${result}
+
+BpmEmulatorRpc Set High Pressure
+    [Documentation]    Method
+    [Arguments]        ${name}    @{args}
+    ${result} =        Call Method    ${tenv.${name}}    set_high_pressure    @{args}
+    RETURN             ${result}
+
+BpmEmulatorRpc Set Low Pressure
+    [Documentation]    Method
+    [Arguments]        ${name}    @{args}
+    ${result} =        Call Method    ${tenv.${name}}    set_low_pressure    @{args}
     RETURN             ${result}
 
 BpmEmulatorRpc Add Interrupt
@@ -111,6 +117,16 @@ BpmEmulatorRpc Get Screen Image
     [Arguments]        ${name}
     RETURN             ${tenv.${name}.screen_image}
 
+BpmEmulatorRpc Get Is Pumping
+    [Documentation]    Attribute
+    [Arguments]        ${name}
+    RETURN             ${tenv.${name}.is_pumping}
+
+BpmEmulatorRpc Get Is Valve Open
+    [Documentation]    Attribute
+    [Arguments]        ${name}
+    RETURN             ${tenv.${name}.is_valve_open}
+
 BpmEmulatorRpc Framework Wait In Idle State
     [Documentation]    Method
     [Arguments]        ${name}    @{args}
@@ -133,6 +149,18 @@ BpmEmulatorRpc Framework Enable Valve
     [Documentation]    Method
     [Arguments]        ${name}    @{args}
     ${result} =        Call Method    ${tenv.${name}}    framework_enable_valve    @{args}
+    RETURN             ${result}
+
+BpmEmulatorRpc Framework Adc Start Pressure Measurement
+    [Documentation]    Method
+    [Arguments]        ${name}    @{args}
+    ${result} =        Call Method    ${tenv.${name}}    framework_adc_start_pressure_measurement    @{args}
+    RETURN             ${result}
+
+BpmEmulatorRpc Framework Adc Stop Pressure Measurement
+    [Documentation]    Method
+    [Arguments]        ${name}    @{args}
+    ${result} =        Call Method    ${tenv.${name}}    framework_adc_stop_pressure_measurement    @{args}
     RETURN             ${result}
 
 BpmEmulatorRpc Emulator Start Emulation

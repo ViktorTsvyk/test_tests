@@ -6,15 +6,12 @@ Resource         keywords.resource
 *** Test Cases ***
 Test Emulator Loaded
     [Documentation]                    Example testcase, that uses BPM Emulator
-    ${start_emulation_status} =        BpmEmulatorRpc Emulator Start Emulation    emulator
-    Should Be Equal As Integers        ${start_emulation_status}  0  Emulator shall start normally
-    Should Be Equal As Integers        ${start_emulation_status}  0  Other API provided by the emulator shall work as well
 
-    Sleep  1.5
+    Utils.Sleep  200
     ${remember_display_refreshes}=     BpmEmulatorRpc Get Display Refreshes    emulator
     Should Be True                     ${remember_display_refreshes}>0  There shall be display refreshes since start
 
-    Sleep  1
+    Utils.Sleep  1000
     ${new_refreshes}=                  BpmEmulatorRpc Get Display Refreshes    emulator
     Should Be Equal As Integers        ${new_refreshes}  ${remember_display_refreshes}  There shall be no display refreshes while no buttons were pressed
 
@@ -39,5 +36,5 @@ Test Emulator Loaded
         Log To Console                 new_refreshes=${new_refreshes}, remember_display_refreshes=${remember_display_refreshes}
         Should Be True                 ${new_refreshes}>${remember_display_refreshes}  There shall be display refreshes after ButtonOk
         ${remember_display_refreshes}=  Set Variable  ${new_refreshes}
-        Sleep  1
+        Utils.Sleep  1000
     END
