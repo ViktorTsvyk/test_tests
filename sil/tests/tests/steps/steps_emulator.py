@@ -19,9 +19,13 @@ MEASUREMENT_STOPPED = "Measurement was stopped"
 PRESSURE_CUFF_ABBR = "HG"
 
 
+@then(parsers.cfparse("Step {step_number} execution"))
+def step_exec(context, step_number):
+    print(f"Executing step {step_number}")
+
 @given("Start bpm emulator rpc")
-def start_bpm_emulator_rpc(context: Context, tenv_func):
-    context.tenv = tenv_func
+def start_bpm_emulator_rpc(context: Context, tenv):
+    context.tenv = tenv
     wait_until_screen_loaded(context)
 
 
@@ -47,7 +51,19 @@ def release_button(context: Context, button):
 
 @when(parsers.cfparse("Device waiting {time} milliseconds"))
 def device_waiting(context: Context, time):
-    SimulatedThread.sleep_ms(int(time))
+    try:
+        total_time = int(time)
+        interval = 1000
+        waited_time = 0
+        while waited_time < total_time:
+            SimulatedThread.sleep_ms(interval)
+            waited_time += interval
+            print(f"Waited {waited_time}/{total_time} ms...")
+
+        print(f"Finished waiting for {total_time} ms successfully.")
+    except Exception as e:
+        print(f"Error while waiting: {e}")
+        Assertions.fail(f"Device waiting encountered an error: {e}")
 
 
 @then("Verify current screen image is equal provided one, ignoring the timestamp section")
@@ -83,7 +99,7 @@ def verify_screen_contains_text(context, text):
 
 @then(("Wait until perform measurement finished"))
 def wait_until_perform_measurement_is_finished(context):
-    measurement_waiting_time = 100000  # millisecond
+    measurement_waiting_time = 50000  # millisecond
     interval = 10000  # millisecond
     waited_time = 0  # millisecond
     while waited_time <= measurement_waiting_time:
@@ -98,19 +114,26 @@ def wait_until_perform_measurement_is_finished(context):
 @then("Verify pressure in the cuff displaying")
 def step_temp_verify_pressure_cuff_displaying(context):
     screen_data = get_text(context.tenv.emulator.screen_image)
+    if not screen_data:
+        Assertions.fail("Screen data is empty or could not be retrieved.")
+
     actual_hg_value = None
+    print(f">> Detected text: {screen_data}")
+
     for value in screen_data:
         normalized_value = value.replace(" ", "").lower()
         if PRESSURE_CUFF_ABBR.lower() in normalized_value:
             try:
                 hg_value = normalized_value.split(":")[-1]
                 actual_hg_value = int(hg_value)
+                break
             except (ValueError, IndexError):
                 actual_hg_value = None
     Assertions.assert_true(
         actual_hg_value is not None and 0 <= actual_hg_value <= 300,
         f"Pressure value is invalid or out of range: {actual_hg_value}"
     )
+
 
 @then(parsers.cfparse(
     "Verify measurement result: SYS equal to {expected_sys_value:d}, DIA equal to {expected_dia_value:d}; With deviation uf {deviation:d} units"))
