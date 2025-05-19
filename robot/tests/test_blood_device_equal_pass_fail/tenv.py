@@ -6,6 +6,10 @@ from devsure.tenv_setup.test import fake_devices as fd
 class TEnv(TEnvSetup):
     """ All the items of test environment are listed here """
 
+    metadata = {
+        "extra": "Important info",
+    }
+
     power_source: fd.DCPowerSupply = Find(
         comment="Power",
         kwargs={"voltage_limit": 240.1, "current_limit": 6.1}

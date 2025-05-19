@@ -1,0 +1,51 @@
+{
+    "comment": "Hardware 4 for testing agents purposes. Blood Pressure Measurement device.",
+    "available": [
+        {
+            "id": "Power4",
+            "target_class": "devsure.tenv_setup.test.fake_devices.DCPowerSupply",
+            "comment": "Power source on the machine. Here kwargs can be overwritten by test, but fixed_kwargs not, resulting kwargs are covered by fixed_kwargs and then passed to __init__ of the class being created (defined in target_class field). NOTE: \"voltage\":12.0 and \"ampers\":5.0 are defined in IN target_class CONSTRUCTOR",
+            "kwargs":{
+                "serial_port":"COM2"
+            },
+            "is_installed": true
+        },
+        {
+            "id": "Adapter4",
+            "target_class": "devsure.tenv_setup.test.fake_devices.DCAdapterAgilent",
+            "comment": "DC power adapter to test with",
+            "kwargs": {
+                "input_voltage": 111.0,
+                "input_current": 0.11,
+                "output_voltage": 6,
+                "output_current": 0.5
+            },
+            "attributes": {
+                "real_physics": false
+            },
+            "is_installed": true
+        },
+        {
+            "id": "Cuff4",
+            "target_class": "devsure.tenv_setup.test.fake_devices.InflatableCuff",
+            "comment": "Inflatable Cuff to test with - flexible",
+            "kwargs":{
+                "cuff_thickness": 0.5,
+                "cuff_area": 150.0
+            },
+            "attributes": {
+                "flexible": false
+            },
+            "is_installed": true
+        },
+        {
+            "id": "Pump4",
+            "target_class": "devsure.tenv_setup.test.fake_devices.Pump",
+            "comment": "Pump to test with",
+            "kwargs":{
+                "min_power": 0.1
+            },
+            "is_installed": true
+        }
+    ]
+}

@@ -1,0 +1,61 @@
+{
+  "comment": "Hardware 7 for testing agents purposes. Defibrillator device.",
+    "available": [
+      {
+            "id": "PowerUnit7",
+            "target_class": "devsure.tenv_setup.test.fake_devices.PowerUnit",
+            "comment": "Power Unit to test with",
+            "kwargs":{
+                "voltage_limit": 440.2,
+                "current_limit": 30.2,
+                "serial_port": "COM7"
+            },
+            "attributes": {
+                "real_physics": false,
+                "brand": "FIDIA"
+            },
+            "is_installed": true
+      },
+      {
+            "id": "Electrodes7",
+            "target_class": "devsure.tenv_setup.test.fake_devices.Electrodes",
+            "comment": "Electrodes to test with",
+            "kwargs":{
+                "material": "Titanium",
+                "thickness": 1.7,
+                "contact_area": 1.1
+            },
+            "attributes": {
+                "real_physics": false
+            },
+            "is_installed": true
+      },
+      {
+            "id": "Switch7",
+            "target_class": "devsure.tenv_setup.test.fake_devices.Switch",
+            "comment": "Switch to test with",
+            "attributes": {
+                "real_physics": false
+            },
+            "is_installed": true
+      },
+      {
+            "id": "Speaker7",
+            "target_class": "devsure.tenv_setup.test.fake_devices.Speaker",
+            "comment": "Speaker to test with",
+            "attributes": {
+                "real_physics": false
+            },
+            "is_installed": true
+      },
+      {
+            "id": "Microprocessor7",
+            "target_class": "devsure.tenv_setup.test.fake_devices.Microprocessor",
+            "comment": "Microprocessor to test with",
+            "attributes": {
+                "real_physics": false
+            },
+            "is_installed": true
+      }
+    ]
+}

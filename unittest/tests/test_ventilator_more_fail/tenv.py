@@ -27,14 +27,12 @@ class TEnv(TEnvSetup):
     temperature: fd.TemperatureFromVolts = Create(kwargs={"coefficient": 100})
     pressure: fd.PressureFromAmperes = Create(kwargs={"coefficient": 200})
 
-    def __init__(self):
+    def setup(self):
         """ Setup the environment for the test case.
         Just skip that if not needed (then do not add constructor at all!)
         Real devices are usually connected physically,
         here we just create fake devices for demo purposes,
         so we need to connect them in code """
-
-        # return  #UNCOMMENT ONCE CREATION IS FIXED!
 
         # ______________________________________________________________________
         # Connect fake devices to each other
@@ -61,19 +59,3 @@ class TEnv(TEnvSetup):
         self.temperature.connected_voltage = self.adc_temperature
         # pressure is calculated from the measured amperage
         self.pressure.connected_amperage = self.adc_pressure
-
-    def tear_down(self):
-        """ Demo for some useful cleanup, if needed,
-        just skip that if not needed
-
-        NOTE: this method is not called automatically,
-        you should call it manually in the test case, if needed
-        (Call that from those places in your test case
-         that correspond to right cleanup location)
-
-        This is just a demo with fake devices, so no real cleanup is needed,
-        but in real life you may need to do some cleanup here
-        depending on kind of devices you are using
-        (or create TEnv instance ONLY ONCE PER PROCESS
-         and reuse it for all tests)"""
-        pass

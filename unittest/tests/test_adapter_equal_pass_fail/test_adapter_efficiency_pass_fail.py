@@ -13,17 +13,15 @@ def rand_pause():
 # ---------------------------------------
 
 class TestOurModel(TestCaseBase):
-    def setUp(self) -> None:
-        # Set up testing environment
-        self.tenv = TEnv()
+    tenv: TEnv
+
+    def setUp(self):
+        super().setUp()
+
         logging.debug(
             f"Testing the pressure inside the cuff with the target pressure:"
             f" {self.tenv.blood_pressure_md.target_pressure}"
         )
-
-    def tearDown(self) -> None:
-        # Tear down testing environment
-        self.tenv.tear_down()
 
     def test_power_adapter_efficiency_more(self):
         efficiency = self.tenv.power_adapter.efficiency

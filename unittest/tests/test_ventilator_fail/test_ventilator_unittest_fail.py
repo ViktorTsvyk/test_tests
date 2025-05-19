@@ -14,12 +14,12 @@ def rand_pause():
 # ---------------------------------------
 
 class TestOurModel(TestCaseBase):
-    def setUp(self) -> None:
-        logging.debug("The most basic demo for GL TAF using unittest available 'out of the box'")
-        self.tenv = TEnv()
+    tenv: TEnv
 
-    def tearDown(self):
-        self.tenv.tear_down()
+    def setUp(self):
+        super().setUp()
+
+        logging.debug("The most basic demo for GL TAF using unittest available 'out of the box'")
 
     def test_power_source(self):
         logging.info(f"Voltage limit: {self.tenv.power_source.voltage_limit}")

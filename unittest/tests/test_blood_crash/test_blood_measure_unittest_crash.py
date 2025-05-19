@@ -17,18 +17,15 @@ def rand_pause():
 # ______________________________________________
 
 class TestOurModel(TestCaseBase):
+    tenv: TEnv
+
     def setUp(self) -> None:
-        logging.debug("Set up testing environment...")
-        self.tenv = TEnv()
+        super().setUp()
         rand_pause()
         logging.debug(
             f"Testing the pressure inside the cuff with the target pressure:"
             f" {self.tenv.blood_pressure_md.target_pressure}"
         )
-
-    def tearDown(self) -> None:
-        logging.debug("Tear down testing environment...")
-        self.tenv.tear_down()
 
     def test_pressure_in_cuff_greater_then_additional(self):
         logging.debug("First test started...")

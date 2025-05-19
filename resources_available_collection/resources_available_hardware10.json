@@ -1,0 +1,61 @@
+{
+  "comment": "Hardware 10 for testing agents purposes. Defibrillator device.",
+    "available": [
+      {
+            "id": "PowerUnit10",
+            "target_class": "devsure.tenv_setup.test.fake_devices.PowerUnit",
+            "comment": "Power Unit to test with",
+            "kwargs":{
+                "voltage_limit": 445.2,
+                "current_limit": 31.2,
+                "serial_port": "COM2"
+            },
+            "attributes": {
+                "real_physics": true,
+                "brand": "AllowTC"
+            },
+            "is_installed": true
+      },
+      {
+            "id": "Electrodes10",
+            "target_class": "devsure.tenv_setup.test.fake_devices.Electrodes",
+            "comment": "Electrodes to test with",
+            "kwargs":{
+                "material": "Titanium",
+                "thickness": 1.8,
+                "contact_area": 1.2
+            },
+            "attributes": {
+                "real_physics": true
+            },
+            "is_installed": true
+      },
+      {
+            "id": "Switch10",
+            "target_class": "devsure.tenv_setup.test.fake_devices.Switch",
+            "comment": "Switch to test with",
+            "attributes": {
+                "real_physics": false
+            },
+            "is_installed": true
+      },
+      {
+            "id": "Speaker10",
+            "target_class": "devsure.tenv_setup.test.fake_devices.Speaker",
+            "comment": "Speaker to test with",
+            "attributes": {
+                "real_physics": true
+            },
+            "is_installed": true
+      },
+      {
+            "id": "Microprocessor10",
+            "target_class": "devsure.tenv_setup.test.fake_devices.Microprocessor",
+            "comment": "Microprocessor to test with",
+            "attributes": {
+                "real_physics": false
+            },
+            "is_installed": true
+      }
+    ]
+}

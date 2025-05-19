@@ -4,4 +4,4 @@ Make sure to include this file in the parent directory containing tests.
 
 """
 
-pytest_plugins = ["devsure.fixtures.conftest"]  # point to the directory with pytest fixtures
+pytest_plugins = ["devsure.fixtures.common_conftest"]  # point to the directory with pytest fixtures
